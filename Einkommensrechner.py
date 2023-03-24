@@ -16,43 +16,41 @@ class IncomeDialog(QDialog):
         self.setWindowTitle("Einkommen berechnen")
         self.setFixedSize(400, 300)
 
-        layout = QFormLayout()
-
         self.hourly_rate_edit = QDoubleSpinBox()
         self.hourly_rate_edit.setRange(0, 999999)
         self.hourly_rate_edit.setDecimals(2)
-        layout.addRow(QLabel("Stundenlohn:"), self.hourly_rate_edit)
 
         self.work_hours_edit = QSpinBox()
         self.work_hours_edit.setRange(0, 9999)
-        layout.addRow(QLabel("Arbeitsstunden pro Woche:"), self.work_hours_edit)
 
         self.weeks_edit = QSpinBox()
         self.weeks_edit.setRange(0, 999)
-        layout.addRow(QLabel("Anzahl der Wochen im Jahr:"), self.weeks_edit)
 
         self.tax_rate_edit = QDoubleSpinBox()
         self.tax_rate_edit.setRange(0, 100)
         self.tax_rate_edit.setSuffix(" %")
         self.tax_rate_edit.setDecimals(2)
         self.tax_rate_edit.setValue(0)
-        layout.addRow(QLabel("Steuersatz:"), self.tax_rate_edit)
 
         self.include_tax_checkbox = QCheckBox("Steuern einbeziehen")
         self.include_tax_checkbox.setChecked(False)
-        layout.addRow(self.include_tax_checkbox)
 
         self.calculate_button = QPushButton("Berechnen")
         self.calculate_button.clicked.connect(self.calculate_income)
-        layout.addRow(self.calculate_button)
 
         self.year_income_label = QLabel()
-        layout.addRow(QLabel("Jahreseinkommen:"), self.year_income_label)
-
         self.month_income_label = QLabel()
-        layout.addRow(QLabel("Monatseinkommen:"), self.month_income_label)
-
         self.week_income_label = QLabel()
+
+        layout = QFormLayout()
+        layout.addRow(QLabel("Stundenlohn:"), self.hourly_rate_edit)
+        layout.addRow(QLabel("Arbeitsstunden pro Woche:"), self.work_hours_edit)
+        layout.addRow(QLabel("Anzahl der Wochen im Jahr:"), self.weeks_edit)
+        layout.addRow(QLabel("Steuersatz:"), self.tax_rate_edit)
+        layout.addRow(self.include_tax_checkbox)
+        layout.addRow(self.calculate_button)
+        layout.addRow(QLabel("Jahreseinkommen:"), self.year_income_label)
+        layout.addRow(QLabel("Monatseinkommen:"), self.month_income_label)
         layout.addRow(QLabel("Wocheneinkommen:"), self.week_income_label)
 
         self.setLayout(layout)
